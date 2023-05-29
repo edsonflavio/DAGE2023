@@ -26,6 +26,7 @@ Para o que possamos trabalhar faz-se necessário a criação de uma conta no Git
   - e) Crie um novo Workspace
   - f) Confirme seu telefone para receber um código de confirmação
   - g) NÃO associe o editor ao VSCode Local
+  - Instalar a extensão Docker no VSCode Web ( Na barra de extensões procure por Docker e Clique em Instalar)
 
 ## Git Pode - Liberando o acesso externo a aplicação
 * gp url 8080
