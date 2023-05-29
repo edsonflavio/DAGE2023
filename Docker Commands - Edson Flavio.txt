@@ -1,6 +1,6 @@
 #Apresentação Docker 
-#Público: UFPR/AGTIC/CSI
-#Data: 20/04/2023
+#Público: UFPR/DAGE2023
+#Data: 29/05/2023
 #Facilitador: Édson Flávio de Souza
 
 #Comando para saber se o docker está ok e sua versão
@@ -8,14 +8,16 @@ docker version
 docker -v
 docker run hello-world
 
-#Criando meu primeiro container
-docker run nginx
-
 #Listando os containers ativos
 docker container ls
 
 #Listando todos os containers
 docker container ls -a
+
+#Criando meu primeiro container
+Localize seu Dockerfile e vá até o diretório ( cd Build )
+docker build --tag=api .
+docker run api
 
 #Visualizando os containers ativos
 docker ps
@@ -23,23 +25,31 @@ docker ps
 #Visualizando todos os containers 
 docker container ps -a
 
+#Inspecionando as configurações do Container
+docker container inspect api
+docker network inspect NomeRede
+docker volume inspect NomeVolume
+
+
 #Persistindo dados - Volumes
 #Usando volumes nomeados
 docker volume create meudados
-docker run -v meusdados:/var/www/html nginx
+docker run -v meudados:/code api
 
 #Usando volumes vinculados diretamente a um diretório 
 #no Sistema de Arquivos
 
-docker run -v /var/www/html:/var/www/html nginx
+docker run -v /var/www/html:/var/www/html api
+docker run -v $PWD:/code
 
 #Listando os volumes criados
 docker volume ls
 
-#Linkando um container a uma rede específica
-
+#Linkando dois containers a um mesmo volume
+docker run -v meusdados:/code api
 docker run -v meudados:/tmp python
 
+#Criando redes específicas para controlar a comunicação entre containers
 #Criando redes
 docker network create minharede
 docker network ls
@@ -53,7 +63,7 @@ docker network create rede_externa
 docker run --network rede_interna --name appserver nginx
 docker run --network rede_interna \
 		   --network rede_externa \
-		   -p 80:80 --name proxy nginx
+		   -p 8000:80 --name proxy nginx
 
 #Para testar a comunicação
 docker exec appserver ping proxy
