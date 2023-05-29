@@ -1,0 +1,109 @@
+#Apresentação Docker 
+#Público: UFPR/AGTIC/CSI
+#Data: 20/04/2023
+#Facilitador: Édson Flávio de Souza
+
+#Comando para saber se o docker está ok e sua versão
+docker version
+docker -v
+docker run hello-world
+
+#Criando meu primeiro container
+docker run nginx
+
+#Listando os containers ativos
+docker container ls
+
+#Listando todos os containers
+docker container ls -a
+
+#Visualizando os containers ativos
+docker ps
+
+#Visualizando todos os containers 
+docker container ps -a
+
+#Persistindo dados - Volumes
+#Usando volumes nomeados
+docker volume create meudados
+docker run -v meusdados:/var/www/html nginx
+
+#Usando volumes vinculados diretamente a um diretório 
+#no Sistema de Arquivos
+
+docker run -v /var/www/html:/var/www/html nginx
+
+#Listando os volumes criados
+docker volume ls
+
+#Linkando um container a uma rede específica
+
+docker run -v meudados:/tmp python
+
+#Criando redes
+docker network create minharede
+docker network ls
+
+#Permitir que dois container se comuniquem
+#Cria-se as redes
+docker network create rede_interna
+docker network create rede_externa
+
+#Cria-se os container que deseja a comunicação
+docker run --network rede_interna --name appserver nginx
+docker run --network rede_interna \
+		   --network rede_externa \
+		   -p 80:80 --name proxy nginx
+
+#Para testar a comunicação
+docker exec appserver ping proxy
+docker exec proxy ping appserver
+
+#Visualizando informações
+docker container inspect
+docker volume inspect
+docker network inspect
+
+#Visualizando Logs
+docker container logs meucontainer
+
+#Visualizando as imagens
+docker images
+docker image inspect 
+
+#Construindo meu primeiro container
+git clone https://github.com/gaelgthomas/docker-first-application-example Build
+cd Build
+docker build -t efsouza/python:1.0 .
+docker run python
+
+#Básico do docker-compose (orquestrado de Container)
+#Estou usando a versão plugin do docker compose por isso escreve-se 
+#separado, em versões mais antigas um pouco usa-se docker-compose ao 
+#invés de docker compose
+
+#Inicia o conjunto de containers listados no arquivo #docker-compose.yaml
+
+docker compose up
+
+#Inicia o conjunto de containers listados no arquivo
+#docker-compose.yaml e libera o terminal
+docker compose up -d
+
+#Para todos os containers ativos do projeto
+docker compose stop
+
+#Inicia todos os containers ativos do projeto
+docker compose start
+
+#Constrói todos os containers do projeto docker-compose.yaml
+docker compose build
+
+#Destrói o projeto sem apagar os volumes
+docker compose down
+
+#Destrói o projeto e apaga todos os volumes vinculados
+#Use com cuidado. Preferencialmente somente em ambiente de testes e 
+#desenvolvimento
+
+docker compose down -v
