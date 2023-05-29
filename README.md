@@ -14,8 +14,8 @@ Para o que possamos trabalhar faz-se necessário a criação de uma conta no Git
 
 * 1) acesse o GitHub com sua conta ou crie uma caso ainda não tenha.
    - a) com a conta criada
-* 2) Clone o projeto do Gabriel para a sua conta
-  - a) https://github.com/new/import e use este endereço ( https://github.com/GabrielSalvadorCardoso/rest-geoapi )
+* 2) Clone o projeto do Gabriel (https://github.com/GabrielSalvadorCardoso/rest-geoapi), porém a partir das alterações que eu fiz,  para a sua conta
+  - a) https://github.com/new/import e use este endereço ( https://github.com/edsonflavio/rest-geoapi )
   - b) Coloque um nome para o projeto ( rest-geoapi )
   - c) Aguarde o processo de clonagem
 * 3) Acesse o site do GitPod usando sua conta do GitHub ( https://gitpod.io/login/ )
